@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 default[:hadoop][:hadoop_handle] = 'hadoop-0.20'
-default[:hadoop][:cdh_version]   = 'cdh4'
+default[:hadoop][:cdh_version]   = 'cdh4.1.2'
 default[:hadoop][:deb_version]   = nil
 default[:hadoop][:cloudera_distro_name] = nil # in case cloudera doesn't have you distro yet
 
