@@ -21,14 +21,14 @@
 
 execute("apt-get update"){ action :nothing }
 
-remote_file "/tmp/cdh4-repository_1.0_all.deb" do
-  source "http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb"
-end
+# remote_file "/tmp/cdh4-repository_1.0_all.deb" do
+#   source "http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb"
+# end
 
-execute "dpkg -i cdh4-repository_1.0_all.deb" do
-  command "dpkg -i cdh4-repository_1.0_all.deb"
-  cwd     "/tmp"
-end
+# execute "dpkg -i cdh4-repository_1.0_all.deb" do
+#   command "dpkg -i cdh4-repository_1.0_all.deb"
+#   cwd     "/tmp"
+# end
 
 template "/etc/apt/sources.list.d/cloudera.list" do
   owner "root"
