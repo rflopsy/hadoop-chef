@@ -1,6 +1,6 @@
 <%- distro = @node[:hadoop][:cloudera_codename] || @node[:lsb][:codename]  %>
 <%- repo = [ 'maverick', @node[:hadoop][:cdh_version] ].compact.join('-') %>
-deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-<%=@node[:hadoop][:cdh-version]%> contrib
-deb-src http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-<%=@node[:hadoop][:cdh-version]%> contrib
+deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-<%=@node[:hadoop][:cdh_version]%> contrib
+deb-src http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-<%=@node[:hadoop][:cdh_version]%> contrib
 
 # bump 0.9.5
