@@ -36,6 +36,7 @@ end
 
 execute "Add cloudera gpg-key" do
   command "curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -"
+  notifies :run, 'execute[apt-get update]', :immediately
 end
 
 
