@@ -30,6 +30,15 @@ execute("apt-get update"){ action :nothing }
 #   cwd     "/tmp"
 # end
 
+apt_package "curl" do
+  action :install
+end
+
+execute "Add cloudera gpg-key" do
+  command "curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -"
+end
+
+
 template "/etc/apt/sources.list.d/cloudera.list" do
   owner "root"
   mode "0644"
