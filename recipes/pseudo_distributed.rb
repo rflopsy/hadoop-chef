@@ -4,6 +4,8 @@ include_recipe 'silverware'
 include_recipe 'hadoop_cluster::add_cloudera_repo'
 include_recipe 'hosts'
 
+node.set[:hosts][:config] = "/etc/hosts"
+
 hosts "127.0.1.1" do
   action :remove
   force  true
