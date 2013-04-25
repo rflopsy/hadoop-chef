@@ -10,7 +10,7 @@ hosts "127.0.1.1" do
 end
 
 hosts node[:vagrant_ip] do
-  entries node[:vagrant_hostname]
+  entries [node[:vagrant_hostname]]
 end
 
 #
