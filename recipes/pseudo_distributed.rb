@@ -2,7 +2,7 @@ include_recipe 'java'
 
 include_recipe 'silverware'
 include_recipe 'hadoop_cluster::add_cloudera_repo'
-include recipe 'hosts'
+include_recipe 'hosts'
 
 hosts "127.0.1.1" do
   action :remove
