@@ -10,6 +10,20 @@ include_recipe 'hadoop_cluster::add_cloudera_repo'
 # daemon_user(:hadoop){ user(:hdfs)   }
 # daemon_user(:hadoop){ user(:mapred) }
 
+
+
+temp_vars = {
+  :hostname    => node['hostname'],
+  :vagrant_ip   => "33.33.33.33"
+}
+template "/etc/hosts" do
+  owner "root"
+  mode "0755"
+  variables(temp_vars)
+  source "hosts.erb"
+end
+
+
 group 'hdfs' do gid 302 ; action [:create] ; end
 user 'hdfs' do
   comment    'Hadoop HDFS User'
