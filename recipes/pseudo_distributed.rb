@@ -2,18 +2,6 @@ include_recipe 'java'
 
 include_recipe 'silverware'
 include_recipe 'hadoop_cluster::add_cloudera_repo'
-include_recipe 'hosts'
-
-node.set[:hosts][:config] = "/etc/hosts"
-
-hosts "127.0.1.1" do
-  action :remove
-  force  true
-end
-
-hosts node[:vagrant_ip] do
-  entries [node[:vagrant_hostname]]
-end
 
 #
 # Hadoop users and group
