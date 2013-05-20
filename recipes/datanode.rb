@@ -61,13 +61,19 @@ template "/etc/hadoop-0.20/conf/fairscheduler.xml" do
 end
 
 # Make hadoop logs live on /hvar/hadoop
-hadoop_log_dir = '/hvar/hadoop/logs'
+hadoop_log_dir = '/mnt/hadoop/logs'
 make_hadoop_dir(hadoop_log_dir, 'hdfs', "0775")
 force_link("/var/log/hadoop", hadoop_log_dir )
 
-hdfs_log_dir = '/hvar/hadoop-hdfs/logs'
+hdfs_log_dir = '/mnt/hadoop-hdfs/logs'
 make_hadoop_dir(hdfs_log_dir, 'hdfs', "0775")
 force_link("/var/log/hadoop-hdfs", hadoop_log_dir )
 
 # Make hadoop point to /var/run for pids
 make_hadoop_dir('/var/run/hadoop', 'root', "0775")
+
+service "hadoop-hdfs-datanode" do
+  running true
+  supports :status => true, :restart => false
+  action :start
+end

@@ -70,6 +70,6 @@ file "/etc/hadoop-0.20/conf/dfs.hosts.exclude" do
 end
 
 # Make hadoop-hdfs logs live on /hvar/hadoop
-hadoop_log_dir = '/hvar/hadoop-hdfs/logs'
+hadoop_log_dir = '/mnt/hadoop-hdfs/logs'
 make_hadoop_dir(hadoop_log_dir, 'hdfs', "0775")
 force_link("/var/log/hadoop-hdfs", hadoop_log_dir )

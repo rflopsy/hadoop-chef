@@ -1,3 +1,4 @@
+
 #
 # Cookbook Name:: hadoop
 # Recipe:: jobtracker
@@ -25,7 +26,7 @@ end
 
 announce(:jobtracker, :server)
 
-hadoop_log_dir = '/hvar/hadoop-0.20-mapreduce/logs'
+hadoop_log_dir = '/mnt/hadoop-0.20-mapreduce/logs'
 make_hadoop_dir(hadoop_log_dir, 'hdfs', "0775")
 force_link("/var/log/hadoop-0.20-mapreduce", hadoop_log_dir )
 
@@ -66,10 +67,18 @@ template "/etc/hadoop/conf/mapred-site.xml" do
   source "mapred-site.xml.erb"
 end
 
+template "/etc/hadoop/conf/hadoop-env.sh" do
+  owner  "root"
+  mode   "0644"
+  variables(template_variables)
+  source "hadoop-env.sh.erb"
+end
+
+
 execute 'create user dirs on HDFS' do
   only_if "service hadoop-hdfs-namenode status"
   only_if "hdfs dfsadmin -safemode get | grep -q OFF"
-  not_if do File.exists?("/hvar/hadoop-hdfs/logs/made_initial_dirs.log") end
+  not_if do File.exists?("/mnt/hadoop-hdfs/logs/made_initial_dirs.log") end
   user 'hdfs'
   
   command %Q{
@@ -77,7 +86,7 @@ execute 'create user dirs on HDFS' do
     hdfs dfs -chown -R mapred /hadoop/system
     hdfs dfs -chmod 755       /hadoop/system/mapred
 
-    touch /hvar/hadoop-hdfs/logs/made_initial_dirs.log 
+    touch /mnt/hadoop-hdfs/logs/made_initial_dirs.log 
   }
 end
 

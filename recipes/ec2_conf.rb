@@ -8,7 +8,7 @@ local_hadoop_dirs.each do |dir|
 end
 
 # Temp dir
-directory '/hvar/tmp' do
+directory '/mnt/tmp' do
   owner     'hdfs'
   group     'hadoop'
   mode      '0777'
@@ -26,7 +26,7 @@ end
 # end
 
 # FIXME: Get this from the node information
-data_volumes = ["/data"]
+data_volumes = ["/mnt2"]
 data_volumes.each do |mount_point|
   Chef::Log.info ["HDFS data dir", mount_point].inspect
   make_hadoop_dir_on_ebs( mount_point +'/hadoop', 'hdfs' )

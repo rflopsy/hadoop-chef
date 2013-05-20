@@ -32,6 +32,11 @@ module HadoopCluster
 
   def ensure_hadoop_owns_hadoop_dirs dir, dir_owner, dir_mode="0755"
     execute "Make sure hadoop owns hadoop dirs" do
+      command %Q{mkdir -p #{dir}}
+    end
+
+    execute "Make sure hadoop owns hadoop dirs" do
+      command %Q{mkdir -p #{dir}}
       command %Q{chown -R #{dir_owner}:hadoop #{dir}}
       command %Q{chmod -R #{dir_mode}         #{dir}}
       not_if{ (File.stat(dir).uid == dir_owner) && (File.stat(dir).gid == 300) }
@@ -48,11 +53,11 @@ module HadoopCluster
   end
 
   def local_hadoop_dirs
-    ["/data/hadoop"]
+    ["/mnt2/hadoop"]
   end
 
   def persistent_hadoop_dirs
-    ["/data/hadoop"]
+    ["/mnt2/hadoop"]
   end
   
   def cluster_ebs_volumes_are_mounted?
@@ -63,7 +68,7 @@ module HadoopCluster
   # The HDFS data. Spread out across persistent storage only
 
   def hadoop_dirs
-    persistent_hadoop_dirs.select {|x| x != "/hvar/hadoop"}
+    persistent_hadoop_dirs.select {|x| x != "/mnt/hadoop"}
   end
   
   def dfs_data_dirs
