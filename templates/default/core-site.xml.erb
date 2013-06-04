@@ -45,22 +45,32 @@
   <name>io.compression.codecs</name>
   <value>org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
 </property>
-<%- unless node[:aws].nil? %>
+
 <property>
-  <name>fs.s3.awsAccessKeyId</name>
-  <value><%= node[:aws][:aws_access_key_id] %></value>
+  <name>hadoop.proxyuser.hue.hosts</name>
+  <value>*</value>
 </property>
 <property>
-  <name>fs.s3.awsSecretAccessKey</name>
-  <value><%= node[:aws][:aws_secret_access_key] %></value>
+  <name>hadoop.proxyuser.hue.groups</name>
+  <value>*</value>
 </property>
-<property>
-  <name>fs.s3n.awsAccessKeyId</name>
-  <value><%= node[:aws][:aws_access_key_id] %></value>
-</property>
-<property>
-  <name>fs.s3n.awsSecretAccessKey</name>
-  <value><%= node[:aws][:aws_secret_access_key] %></value>
-</property>
-<%- end %>
+
+  <property>
+    <name>hadoop.proxyuser.oozie.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.oozie.groups</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.httpfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.httpfs.groups</name>
+    <value>*</value>
+  </property>
+
 </configuration>

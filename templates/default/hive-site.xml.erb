@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+  <property>
+    <name>hive.heartbeat.interval</name>
+    <value><%= @hive_heartbeat_interval %></value>
+    <description>Send a heartbeat after this interval - used by mapjoin and filter operators</description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value><%= @zookeeper_address %></value>
+    <description>
+      point this to the ZK nodes
+    </description>
+  </property>
+
+ <property>
+    <name>fs.default.name</name>
+    <value>hdfs://<%= @namenode_fqdn %>:8020/</value>
+    <description>
+  </description>
+  </property>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value><%= @jobtracker_fqdn %>:8021</value>
+    <description>
+  </description>
+  </property>
+
+  <property>
+    <name>mapred.map.tasks</name>
+    <value><%= @mapred_map_tasks %></value>
+    <description>
+  </description>
+  </property>
+
+  <property>
+    <name>hive.aux.jars.path</name>
+    <value><%= @hive_aux_jars_path %></value>
+    <description>
+  
+  </description>
+  </property>
+  <property>
+    <name>hbase.master</name>
+    <value><%= @hbase_master_host %>:<%= @hbase_master_port %></value>
+    <description>
+  </description>
+  </property>
+
+</configuration>
