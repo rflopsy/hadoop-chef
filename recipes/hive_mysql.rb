@@ -100,30 +100,20 @@ package 'hive-server'
 
 
 # setup mysql..
-# package 'mysql-server'
-include_recipe "mysql::server"
-
-
 # node['mysql']['server_root_password'] - Set the server's root password
 # node['mysql']['server_repl_password'] - Set the replication user 'repl' password
 # node['mysql']['server_debian_password'] - Set the debian-sys-maint user password
-Chef::Log.info("----- Templating app_grants.sql -----")
 
-template "/tmp/app_grants.sql" do
+include_recipe "mysql::server"
+grants_path = "/etc/mysql/app_grants.sql"
+
+template grants_path do
   source "app_grants.sql.erb"
   owner "root"
   group "root"
   mode "0600"
   action :create
 end
-
-
-# execute "mysql-install-application-privileges" do
-#   command "/usr/bin/mysql -u root -p
-# #{node['mysql']['server_root_password'].empty? ? '' : '-p'}#{node['mysql']['server_root_password']} < #{grants_path}"
-#   action :nothing
-#   subscribes :run, resources(:template => "/etc/mysql/app_grants.sql"), :immediately
-# end
 
 
 execute "mysql-install-application-privileges" do
