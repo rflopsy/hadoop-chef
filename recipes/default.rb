@@ -73,4 +73,3 @@ end
 execute "mkdir -p /opt/ruby/bin"
 execute "rm -f /opt/ruby/bin/ruby"
 execute "cp /opt/chef/embedded/bin/ruby /opt/ruby/bin/ruby"
-
