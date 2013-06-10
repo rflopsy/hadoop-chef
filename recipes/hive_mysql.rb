@@ -95,7 +95,12 @@ end
 
 execute "/usr/sbin/update-rc.d -f hadoop-hive-server remove"
 
-# setup mysql..
+package 'hive-metastore'
+package 'hive-server'
 
+# setup mysql..
+# package 'mysql-server'
 # CREATE USER 'hive'@'localhost' IDENTIFIED BY 'hive';
 # GRANT ALL PRIVILEGES ON *.* TO 'hive'@'localhost' WITH GRANT OPTION;
+
+# remote_file https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar /usr/lib/hive/lib

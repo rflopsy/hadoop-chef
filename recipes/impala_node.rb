@@ -23,5 +23,10 @@ template "/etc/default/impala" do
   variables(site_variables)
 end
 
-execute("/etc/init.d/impala-server start")
+service "impala-server" do
+  action [ :enable, :start ]
+  running true
+  supports :status => true, :restart => true
+end
 
+execute "/etc/init.d/impala-server start"
