@@ -6,7 +6,7 @@ description       "Installs hadoop and sets up a high-performance cluster. Inspi
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version           "0.9.9"
 
-%w(java silverware hosts).each do |cb|
+%w(java silverware hosts mysql).each do |cb|
   depends cb
 end
 

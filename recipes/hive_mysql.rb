@@ -18,7 +18,19 @@
 # limitations under the License.
 #
 
-package "hive"
+include_recipe "mysql::server"
+
+package "hive" do
+  options "-f"
+end
+
+package 'hive-server' do
+  options "-f"
+end
+
+package 'hive-metastore' do
+  options "-f"
+end
 
 zk_server_info = []
 
@@ -85,7 +97,6 @@ directory "/var/run/hive" do
   recursive true
 end
 
-package "hive-server"
 
 service "hive-server" do
   action [ :enable, :start ]
@@ -95,8 +106,6 @@ end
 
 execute "/usr/sbin/update-rc.d -f hadoop-hive-server remove"
 
-package 'hive-metastore'
-package 'hive-server'
 
 
 # setup mysql..
@@ -104,7 +113,7 @@ package 'hive-server'
 # node['mysql']['server_repl_password'] - Set the replication user 'repl' password
 # node['mysql']['server_debian_password'] - Set the debian-sys-maint user password
 
-include_recipe "mysql::server"
+
 grants_path = "/etc/mysql/app_grants.sql"
 
 template grants_path do
@@ -136,4 +145,5 @@ end
 # remote_file https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar
 remote_file "/usr/lib/hive/lib/mysql-connector-java-5.1.18-bin.jar" do
   source "https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar"
+  mode   "0644"
 end

@@ -1,6 +1,8 @@
 include_recipe 'java'
 
-package "hive"
+package "hive" do
+  options "-f"
+end
 
 zk_server_info = []
 
