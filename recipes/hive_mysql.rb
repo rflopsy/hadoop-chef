@@ -115,6 +115,14 @@ template grants_path do
   action :create
 end
 
+# bind address should be 0.0.0.0 for jdbc connector
+template "/etc/mysql/my.cnf" do
+  source "my.cnf.erb"
+  owner  "root"
+  group  "root"
+  mode   "0644"
+  action :create
+end
 
 execute "mysql-install-application-privileges" do
   command "/usr/bin/mysql -u root -p#{node['mysql']['server_root_password']} < /etc/mysql/app_grants.sql"
