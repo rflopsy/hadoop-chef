@@ -133,4 +133,7 @@ end
 # CREATE USER 'hive'@'localhost' IDENTIFIED BY 'hive';
 # GRANT ALL PRIVILEGES ON *.* TO 'hive'@'localhost' WITH GRANT OPTION;
 
-# remote_file https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar /usr/lib/hive/lib
+# remote_file https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar
+remote_file "/usr/lib/hive/lib/mysql-connector-java-5.1.18-bin.jar" do
+  source "https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar"
+end
