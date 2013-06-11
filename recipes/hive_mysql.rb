@@ -18,20 +18,6 @@
 # limitations under the License.
 #
 
-include_recipe "mysql::server"
-
-package "hive" do
-  options "-f"
-end
-
-package 'hive-server' do
-  options "-f"
-end
-
-package 'hive-metastore' do
-  options "-f"
-end
-
 zk_server_info = []
 
 if node[:vagrant] or node[:standalone]
