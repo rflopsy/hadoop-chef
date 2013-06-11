@@ -18,6 +18,16 @@
 # limitations under the License.
 #
 
+include_recipe "mysql::server"
+
+execute("rm -f /etc/hadoop/conf.empty/mapred-site.xml")
+
+package "hive"
+package 'hive-server'
+package 'hive-metastore'
+ 
+
+
 zk_server_info = []
 
 if node[:vagrant] or node[:standalone]
