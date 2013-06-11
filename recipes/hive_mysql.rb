@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+execute("rm -f /etc/hadoop/conf.empty/mapred-site.xml")
+
 package "hive"
 
 zk_server_info = []
