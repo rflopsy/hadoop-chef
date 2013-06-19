@@ -10,7 +10,12 @@ package "impala-server" do
   action :install
 end
 
+
 namenode  = discover(:namenode, :server).private_ip rescue nil
+
+if node[:vagrant]
+  namenode = "localhost"
+end
 
 site_variables = {
     :state_store  => namenode,

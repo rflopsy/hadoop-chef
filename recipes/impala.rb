@@ -13,6 +13,10 @@ jobtracker   = discover(:jobtracker, :server).private_ip rescue nil
 namenode     = discover(:namenode, :server).private_ip rescue nil
 hive_metastore = discover(:namenode, :server).private_ip rescue nil
 
+if node[:vagrant]
+  hive_metastore = "33.33.33.33"
+end
+
 
 site_variables = {
   :zookeeper_address   => "localhost",

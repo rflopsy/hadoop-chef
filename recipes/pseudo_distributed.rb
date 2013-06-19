@@ -112,6 +112,13 @@ template "/etc/hadoop/conf/core-site.xml" do
   source "pseudo-core-site.xml.erb"
 end
 
+# Required for Impala
+template "/etc/hadoop/conf/hdfs-site.xml" do
+  owner "root"
+  mode "0755"
+  source "pseudo-hdfs-site.xml.erb"
+end
+
 execute 'format_namenode' do
   command %Q{yes 'Y' | hadoop namenode -format ; true}
   user 'hdfs'
