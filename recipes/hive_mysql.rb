@@ -25,8 +25,6 @@ execute("rm -f /etc/hadoop/conf.empty/mapred-site.xml")
 package "hive"
 package 'hive-server'
 package 'hive-metastore'
- 
-
 
 zk_server_info = []
 
@@ -73,8 +71,7 @@ template "/etc/hive/conf/hive-site.xml" do
   variables(site_variables)
 end
 
-env_variables = {
-  }
+env_variables = {}
 
 template "/etc/hive/conf/hive-env.sh" do
   source "hive-env.sh.erb"
@@ -95,20 +92,18 @@ end
 
 
 service "hive-server" do
-  action [ :enable, :start ]
+  action [ :start ]
   running true
   supports :status => true, :restart => true
 end
 
-execute "/usr/sbin/update-rc.d -f hadoop-hive-server remove"
+service "hive-metastore" do
+  action [ :start ]
+  running true
+  supports :status => true, :restart => true
+end
 
-
-
-# setup mysql..
-# node['mysql']['server_root_password'] - Set the server's root password
-# node['mysql']['server_repl_password'] - Set the replication user 'repl' password
-# node['mysql']['server_debian_password'] - Set the debian-sys-maint user password
-
+# execute "/usr/sbin/update-rc.d -f hadoop-hive-server remove"
 
 grants_path = "/etc/mysql/app_grants.sql"
 
@@ -135,11 +130,11 @@ execute "mysql-install-application-privileges" do
   subscribes :run, resources(:template => "/etc/mysql/app_grants.sql"), :immediately
 end
 
-# CREATE USER 'hive'@'localhost' IDENTIFIED BY 'hive';
-# GRANT ALL PRIVILEGES ON *.* TO 'hive'@'localhost' WITH GRANT OPTION;
+mysql_connector = "/usr/lib/hive/lib/mysql-connector-java-5.1.18-bin.jar"
 
-# remote_file https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar
-remote_file "/usr/lib/hive/lib/mysql-connector-java-5.1.18-bin.jar" do
+remote_file mysql_connector do
   source "https://find-ur-pal.googlecode.com/files/mysql-connector-java-5.1.18-bin.jar"
   mode   "0644"
+  not_if { ::File.exists?(mysql_connector) }
+  notifies :restart, "service[hive-metastore]", :delayed
 end
