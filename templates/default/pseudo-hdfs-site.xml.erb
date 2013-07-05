@@ -28,10 +28,6 @@
   </property>
 
   <property>
-    <name>dfs.client.use.legacy.blockreader.local</name>
-    <value>true</value>
-  </property>
-  <property>
     <name>dfs.client.read.shortcircuit</name>
     <value>true</value>
   </property>
@@ -45,5 +41,25 @@
     <name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
     <value>true</value>
   </property>
+
+<property>
+  <name>dfs.webhdfs.enabled</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>dfs.client.read.shortcircuit</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>dfs.client.file-block-storage-locations.timeout</name>
+  <value>5000</value>
+</property>
+
+<property>
+  <name>dfs.datanode.hdfs-blocks-metadata.enabled</name>
+  <value>true</value>
+</property>
 
 </configuration>

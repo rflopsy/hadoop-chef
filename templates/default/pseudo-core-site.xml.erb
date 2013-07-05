@@ -33,4 +33,14 @@
     <description>Number of minutes between trash checkpoints. If zero, the trash feature is disabled.</description>
   </property>
 
+<property>
+  <name>jobtracker.thrift.address</name>
+  <value>0.0.0.0:9290</value>
+</property>
+<property>
+  <name>mapred.jobtracker.plugins</name>
+  <value>org.apache.hadoop.thriftfs.ThriftJobTrackerPlugin</value>
+  <description>Comma-separated list of jobtracker plug-ins to be activated.</description>
+</property>
+
 </configuration>
