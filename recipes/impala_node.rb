@@ -18,7 +18,9 @@ if node[:vagrant]
 end
 
 site_variables = {
-    :state_store  => namenode,
+  :state_store  => namenode,
+  :num_threads_per_disk => 3,
+  :num_disks => 3
 }
 
 template "/etc/default/impala" do

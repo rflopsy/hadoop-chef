@@ -17,7 +17,9 @@ else
 end
 
 site_variables = {
-    :state_store  => statestore,
+  :state_store  => statestore,
+  :num_threads_per_disk => 3,
+  :num_disks => 3
 }
 
 template "/etc/default/impala" do
