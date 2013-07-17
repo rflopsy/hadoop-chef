@@ -28,6 +28,6 @@ end
 execute 'format_namenode **IDEMPOTENT**' do
   command %Q{yes 'Y' | hdfs namenode -format ; true}
   user 'hdfs'
-  creates '/mnt2/hadoop/hdfs/name/current/VERSION'
+  creates '/data1/hadoop/hdfs/name/current/VERSION'
   notifies  :restart, resources(:service => "hadoop-hdfs-namenode"), :immediately
 end
