@@ -53,11 +53,11 @@ module HadoopCluster
   end
 
   def local_hadoop_dirs
-    ["/data1/hadoop", "/data2/hadoop", "/data3/hadoop"]
+    node[:hdfs_dirs]
   end
 
   def persistent_hadoop_dirs
-    ["/data1/hadoop", "/data2/hadoop", "/data3/hadoop"]
+    node[:hdfs_dirs]
   end
   
   def cluster_ebs_volumes_are_mounted?
