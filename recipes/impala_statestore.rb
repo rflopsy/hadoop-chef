@@ -28,3 +28,7 @@ template "/etc/default/impala" do
   owner "root"
   variables(site_variables)
 end
+
+
+execute "service impala-state-store start"
+execute "service impala-server start"

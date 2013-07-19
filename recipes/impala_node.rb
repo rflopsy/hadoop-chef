@@ -36,4 +36,4 @@ service "impala-server" do
   supports :status => true, :restart => true
 end
 
-execute "/etc/init.d/impala-server start"
+execute "sudo -E service impala-server start"
