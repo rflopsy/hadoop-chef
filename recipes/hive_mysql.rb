@@ -20,7 +20,7 @@
 
 include_recipe "mysql::server"
 
-execute("rm -f /etc/hadoop/conf.empty/mapred-site.xml")
+#execute("rm -f /etc/hadoop/conf.empty/mapred-site.xml")
 
 package "hive"
 package 'hive-server'

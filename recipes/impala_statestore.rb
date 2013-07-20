@@ -29,6 +29,23 @@ template "/etc/default/impala" do
   variables(site_variables)
 end
 
+execute "service impala-state-store start" do
+  command "service impala-state-store start"
+  ignore_failure true
+end
 
-execute "service impala-state-store start"
-execute "service impala-server start"
+# execute "impala-server start" do
+#   user  'ubuntu'
+#   command "export LC_ALL=en_US.UTF-8 /etc/init.d/impala-server start"
+#   environment ({'LC_ALL' => 'en_US.UTF-8'})
+# end
+
+bash "impala-server start" do
+  user 'root'
+  environment ({'LC_ALL' => 'en_US.UTF-8'})
+  code <<-EOH
+    LC_ALL=en_US.UTF-8 /etc/init.d/impala-server start
+  EOH
+end
+
+
